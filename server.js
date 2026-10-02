@@ -5,7 +5,31 @@ db.exec(`CREATE TABLE IF NOT EXISTS users(id INTEGER PRIMARY KEY,email TEXT UNIQ
 CREATE TABLE IF NOT EXISTS posts(id INTEGER PRIMARY KEY,slug TEXT UNIQUE,title TEXT,excerpt TEXT,body TEXT,cat TEXT,tags TEXT DEFAULT '',status TEXT DEFAULT 'draft',publish_at TEXT,created TEXT DEFAULT CURRENT_TIMESTAMP);
 CREATE TABLE IF NOT EXISTS comments(id INTEGER PRIMARY KEY,post_id INTEGER REFERENCES posts(id) ON DELETE CASCADE,name TEXT,body TEXT,hidden INTEGER DEFAULT 0,created TEXT DEFAULT CURRENT_TIMESTAMP);
 CREATE TABLE IF NOT EXISTS messages(id INTEGER PRIMARY KEY,name TEXT,email TEXT,subject TEXT,body TEXT,created TEXT DEFAULT CURRENT_TIMESTAMP);
-CREATE INDEX IF NOT EXISTS ix_c ON comments(post_id);`);
+CREATE INDEX IF NOT EXISTS ix_c ON comments(post_id);`);if (process.env.ADMIN_EMAIL && process.env.ADMIN_PASSWORD) {
+  const email = process.env.ADMIN_EMAIL.toLowerCase();
+  const name = process.env.ADMIN_NAME || 'ซินอี๋';
+  const hash = bcrypt.hashSync(process.env.ADMIN_PASSWORD, 12);
+
+  const exists = db.prepare('SELECT id FROM users WHERE email=?').get(email);
+
+  if (exists) {
+    db.prepare('UPDATE users SET name=?, hash=?, role=? WHERE email=?')
+      .run(name, hash, 'admin', email);
+  } else {
+    db.prepare("INSERT INTO users(email,name,hash,role) VALUES(?,?,?,'admin')")
+      .run(email, name, hash);
+  }
+}
+  const exists = db.prepare('SELECT id FROM users WHERE email=?').get(process.env.ADMIN_EMAIL.toLowerCase());
+  if (!exists) {
+    db.prepare("INSERT INTO users(email,name,hash,role) VALUES(?,?,?,'admin')")
+      .run(
+        process.env.ADMIN_EMAIL.toLowerCase(),
+        process.env.ADMIN_NAME || 'ซินอี๋',
+        bcrypt.hashSync(process.env.ADMIN_PASSWORD, 12)
+      );
+  }
+}
 const app = express(); app.disable('x-powered-by'); app.set('trust proxy', 1);
 app.use(express.urlencoded({ extended: false, limit: '100kb' }));
 app.use(express.static('public', { maxAge: '7d' }));
