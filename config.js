@@ -7,6 +7,10 @@ module.exports = {
   siteUrl: process.env.SITE_URL || 'http://localhost:3000',
   ownerName: 'XieXinYi',
   socialLinks: { instagram: 'https://www.instagram.com/xie_xinyii/', tiktok: '', facebook: 'https://www.facebook.com/share/19cvJNXbbB/', youtube: 'https://youtube.com/@hello_baby88' },
-  categories: [['love','ความรัก'],['goals','เป้าหมาย'],['travel','การเดินทาง'],['society','สังคม']],
-  journey: [] // เช่น { year:'My Journey', text:'การเดินทางของฉันและเธอคือการเรียนรู้ การเรียนรู้ของเราสองคนคือการเดินทาง' }
-};
+  categories: [['love','ความรัก'],['goals','ชีวิต'],['travel','การเดินทาง'],['society','สังคม']],
+  journey: [
+  {
+    year: 'My Journey',
+    text: 'การเดินทางของฉันและเธอคือการเรียนรู้ การเรียนรู้ของเราสองคนคือการเดินทาง'
+  }
+]
