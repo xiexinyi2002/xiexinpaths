@@ -3,10 +3,10 @@ module.exports = {
   siteName: 'XieXinpaths',
   title: 'XieXinpaths — Stories Beneath the Surface',
   tagline: 'Welcome to my little ocean.',
-  description: 'พื้นที่เล็ก ๆ ใต้มหาสมุทร สำหรับเก็บเรื่องราว ความคิด ความทรงจำ และการเดินทางของฉัน',
+  description: 'สวัสดี แบมเอง 👋 อันนี้เป็นบล็อกที่เราอยากแชร์มุมมองของเราให้ชาวโลกรู้น่ะ มาม้ะ มาตั้งคำถามต่อโลกใบนี้ด้วยกัน...',
   siteUrl: process.env.SITE_URL || 'http://localhost:3000',
-  ownerName: 'ชื่อเจ้าของบล็อก (แก้ใน config.js)',
-  socialLinks: { instagram: 'https://www.instagram.com/xie_xinyii/', tiktok: '', facebook: '', youtube: '' },
+  ownerName: 'XieXinYi',
+  socialLinks: { instagram: 'https://www.instagram.com/xie_xinyii/', tiktok: '', facebook: 'https://www.facebook.com/share/19cvJNXbbB/', youtube: 'https://youtube.com/@hello_baby88' },
   categories: [['love','ความรัก'],['goals','เป้าหมาย'],['travel','การเดินทาง'],['society','สังคม']],
   journey: [] // เช่น { year:'2026', text:'เริ่มเขียนบล็อก' }
 };
